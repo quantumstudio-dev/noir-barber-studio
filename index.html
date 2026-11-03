@@ -59,20 +59,28 @@ footer{text-align:center;padding:25px;border-top:1px solid var(--line);font-size
   <p>Choisis le service qui te convient.</p>
 
   <div class="services">
-    <button type="button" class="service selected" data-service="Coupe classique" data-price="20" data-duration="30 min">
-      <h3>Coupe classique</h3>
-      <div class="price">20 €</div>
-      <div class="duration">30 minutes</div>
+    <button type="button" class="service selected"
+  data-service="Coupe classique"
+  data-price="20"
+  data-duration="20 min"
+  data-link="https://cal.com/quantumstudio/coupeclassique20min">
+    <button type="button" class="service"
+  data-service="Coupe + barbe"
+  data-price="30"
+  data-duration="45 min"
+  data-link="https://cal.com/quantumstudio/coupe-barbe">
+  <h3>Coupe + barbe</h3>
+  <div class="price">30 €</div>
+  <div class="duration">45 minutes</div>
     </button>
-    <button type="button" class="service" data-service="Coupe + barbe" data-price="30" data-duration="45 min">
-      <h3>Coupe + barbe</h3>
-      <div class="price">30 €</div>
-      <div class="duration">45 minutes</div>
-    </button>
-    <button type="button" class="service" data-service="Coupe premium" data-price="25" data-duration="40 min">
-      <h3>Coupe premium</h3>
-      <div class="price">25 €</div>
-      <div class="duration">40 minutes</div>
+    <button type="button" class="service"
+  data-service="Coupe premium"
+  data-price="25"
+  data-duration="40 min"
+  data-link="https://cal.com/quantumstudio/coupe-premium">
+  <h3>Coupe premium</h3>
+  <div class="price">25 €</div>
+  <div class="duration">40 minutes</div>
     </button>
   </div>
 
@@ -153,7 +161,15 @@ const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
 dateInput.min = localToday;
 
 document.getElementById('bookingForm').addEventListener('submit', event => {
-  event.preventDefault();
+  event.preventDefault();   const bookingLink = chosenService.dataset.link;
+
+  if (!bookingLink) {
+    alert('Lien de réservation indisponible.');
+    return;
+  }
+
+  window.location.href = bookingLink;
+  return;
 
   if (dateInput.value < localToday) {
     alert('Choisis une date qui ne soit pas passée.');
