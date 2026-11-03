@@ -185,51 +185,6 @@ document.getElementById('bookingForm').addEventListener('submit', event => {
 
   window.location.href = bookingLink;
 });
-  event.preventDefault();   const bookingLink = chosenService.dataset.link;
-
-  if (!bookingLink) {
-    alert('Lien de réservation indisponible.');
-    return;
-  }
-
-  window.location.href = bookingLink;
-  return;
-
-  if (dateInput.value < localToday) {
-    alert('Choisis une date qui ne soit pas passée.');
-    return;
-  }
-
-  const date = new Date(dateInput.value + 'T12:00:00');
-  const formattedDate = date.toLocaleDateString('fr-FR', {
-    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
-  });
-
-  const details = [
-    ['Prestation', chosenService.dataset.service],
-    ['Prix indicatif', chosenService.dataset.price + ' €'],
-    ['Durée indicative', chosenService.dataset.duration],
-    ['Date souhaitée', formattedDate],
-    ['Horaire souhaité', document.getElementById('time').value],
-    ['Client', document.getElementById('name').value],
-    ['E-mail', document.getElementById('email').value],
-    ['Précision', document.getElementById('notes').value || 'Aucune']
-  ];
-
-  document.getElementById('summary').replaceChildren(
-    ...details.map(([label, value]) => {
-      const line = document.createElement('p');
-      const strong = document.createElement('strong');
-      strong.textContent = label + ' : ';
-      line.append(strong, document.createTextNode(value));
-      return line;
-    })
-  );
-
-  const result = document.getElementById('result');
-  result.style.display = 'block';
-  result.scrollIntoView({behavior:'smooth', block:'start'});
-});
 </script>
 </body>
 </html>
